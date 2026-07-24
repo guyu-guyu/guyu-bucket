@@ -23,7 +23,7 @@ README.md     # 本文件
 
 | 应用 | 描述 | 版本 |
 |------|------|------|
-|      |      |      |
+| schedulecenter | Windows 定时任务管理中心 — WPF GUI + CLI 双模式 | 0.1.0 |
 
 ## 许可证
 
