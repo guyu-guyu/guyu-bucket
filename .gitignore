@@ -1,0 +1,4 @@
+# Scoop bucket
+*.log
+.DS_Store
+Thumbs.db

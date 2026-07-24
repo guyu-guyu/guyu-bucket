@@ -1,0 +1,30 @@
+# guyu-bucket 🪣
+
+我的个人 [Scoop](https://scoop.sh) bucket，收录我自己维护和常用的应用清单。
+
+## 使用方法
+
+```powershell
+# 添加此 bucket
+scoop bucket add guyu-bucket https://github.com/guyu-guyu/guyu-bucket.git
+
+# 安装应用
+scoop install guyu-bucket/<app-name>
+```
+
+## 目录结构
+
+```
+bucket/       # 应用 manifest 文件（JSON）
+README.md     # 本文件
+```
+
+## 应用列表
+
+| 应用 | 描述 | 版本 |
+|------|------|------|
+|      |      |      |
+
+## 许可证
+
+MIT
