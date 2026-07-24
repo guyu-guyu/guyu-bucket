@@ -1,0 +1,35 @@
+name: Auto-Update Manifests
+
+on:
+  schedule:
+    # 每天凌晨 3 点检查更新
+    - cron: '0 3 * * *'
+  workflow_dispatch:   # 也支持手动触发
+
+jobs:
+  update:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Scoop
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+          Invoke-RestMethod get.scoop.sh | Invoke-Expression
+          scoop bucket add guyu-bucket ${{ github.workspace }}
+
+      - name: Check and update manifests
+        shell: pwsh
+        run: |
+          # 扫描 bucket 下所有 manifest，更新到最新版本
+          scoop checkver guyu-bucket --update --all
+
+      - name: Commit changes
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "chore: auto-update manifests"
+          git push
