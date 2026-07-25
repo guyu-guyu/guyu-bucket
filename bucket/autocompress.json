@@ -14,7 +14,9 @@
             "hash": "7223aa6af95ab80c3852493fcffb0b8ad1194495e805b111bafea2cce5a3422e"
         }
     },
-    "innosetup": true,
+    "pre_install": [
+        "Expand-7zipArchive \"$dir\\AutoCompress_$version.exe\" \"$dir\" -Removal"
+    ],
     "bin": [
         [
             "AutoCompress.exe",
