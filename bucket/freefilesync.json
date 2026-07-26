@@ -13,7 +13,19 @@
             "hash": "6f2e97152bb29185f7afa172a3992172bcc2fb77506dc51b34e9a78a949c3933"
         }
     },
-    "innosetup": true,
+    "installer": {
+        "args": [
+            "/VERYSILENT",
+            "/SUPPRESSMSGBOXES",
+            "/NORESTART",
+            "/DIR=\"$dir\"",
+            "/NOICONS"
+        ]
+    },
+    "uninstaller": {
+        "file": "unins000.exe",
+        "args": "/VERYSILENT"
+    },
     "bin": [
         "FreeFileSync.exe",
         "RealTimeSync.exe"
