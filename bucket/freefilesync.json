@@ -13,19 +13,8 @@
             "hash": "6f2e97152bb29185f7afa172a3992172bcc2fb77506dc51b34e9a78a949c3933"
         }
     },
-    "installer": {
-        "args": [
-            "/VERYSILENT",
-            "/SUPPRESSMSGBOXES",
-            "/NORESTART",
-            "/DIR=\"$dir\"",
-            "/NOICONS"
-        ]
-    },
-    "uninstaller": {
-        "file": "unins000.exe",
-        "args": "/VERYSILENT"
-    },
+    "innosetup": true,
+    "post_install": "New-Item -ItemType File -Path \"$dir\\Install.dat\" -Force | Out-Null",
     "bin": [
         "FreeFileSync.exe",
         "RealTimeSync.exe"
