@@ -25,6 +25,7 @@ README.md     # 本文件
 |------|------|------|
 | schedulecenter | Windows 定时任务管理中心 — WPF GUI + CLI 双模式 | 0.1.0 |
 | autocompress | 视频素材定时压缩工具，自动扫描+ffmpeg 压缩+cron调度 | 0.2.0 |
+| freefilesync | 开源文件夹同步和备份工具，支持本地/网络/MTP 设备同步 | 14.10 |
 
 ## 许可证
 

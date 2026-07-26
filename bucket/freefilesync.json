@@ -1,0 +1,42 @@
+{
+    "version": "14.10",
+    "description": "开源文件夹同步和备份工具，支持本地、网络、MTP 设备之间的文件同步",
+    "homepage": "https://freefilesync.org",
+    "license": "GPL-3.0-only",
+    "notes": [
+        "FreeFileSync 是开源软件（GPLv3）",
+        "支持实时同步（RealTimeSync）"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://freefilesync.org/download/FreeFileSync_14.10_Windows_Setup.exe",
+            "hash": "6f2e97152bb29185f7afa172a3992172bcc2fb77506dc51b34e9a78a949c3933"
+        }
+    },
+    "innosetup": true,
+    "bin": [
+        "FreeFileSync.exe",
+        "RealTimeSync.exe"
+    ],
+    "shortcuts": [
+        [
+            "FreeFileSync.exe",
+            "FreeFileSync"
+        ],
+        [
+            "RealTimeSync.exe",
+            "RealTimeSync"
+        ]
+    ],
+    "checkver": {
+        "url": "https://freefilesync.org/download.php",
+        "regex": "FreeFileSync_([\\d.]+)_Windows_Setup\\.exe"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://freefilesync.org/download/FreeFileSync_$version_Windows_Setup.exe"
+            }
+        }
+    }
+}
