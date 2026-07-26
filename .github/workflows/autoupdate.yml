@@ -2,9 +2,8 @@ name: Auto-Update Manifests
 
 on:
   schedule:
-    # 每天凌晨 3 点检查更新
     - cron: '0 3 * * *'
-  workflow_dispatch:   # 也支持手动触发
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,37 +11,84 @@ permissions:
 jobs:
   update:
     runs-on: windows-latest
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup Scoop and check for updates
+      - name: Check for updates
         shell: pwsh
-        continue-on-error: true
         run: |
-          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-          Invoke-RestMethod get.scoop.sh | Invoke-Expression
-
-          $ws = '${{ github.workspace }}'
-          $url = "file:///$($ws.Replace('\','/'))"
-          scoop bucket add guyu-bucket $url
-
-          $bucketDir = "$env:USERPROFILE\scoop\buckets\guyu-bucket"
-          Get-ChildItem "$bucketDir\bucket\*.json" | ForEach-Object {
+          $updated = $false
+          Get-ChildItem "${{ github.workspace }}\bucket\*.json" | ForEach-Object {
+            $manifestPath = $_.FullName
+            $manifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
             $appName = $_.BaseName
-            Write-Host "Checking $appName ..."
-            $result = scoop checkver $appName --update 2>&1
-            if ($LASTEXITCODE -eq 0) {
-              Write-Host "  $appName is up to date."
-            } elseif ($result -match "New version") {
-              Write-Host "  $appName has been updated!"
-            } else {
-              Write-Host "  $appName check skipped (non-fatal)."
+
+            # Extract GitHub repo from checkver.github URL
+            $checkverUrl = $manifest.checkver.github
+            if (-not $checkverUrl) {
+              Write-Host "$appName : no github checkver, skipping"
+              return
             }
+            $repo = $checkverUrl -replace '^https://github\.com/', ''
+            Write-Host "Checking $appName (repo: $repo) ..."
+
+            # Get latest release tag
+            $latest = gh release view --repo $repo --json tagName,assets 2>&1 | ConvertFrom-Json
+            if (-not $latest) {
+              Write-Host "  Failed to fetch release info"
+              return
+            }
+            $latestTag = $latest.tagName -replace '^v', ''
+            $currentVer = $manifest.version
+            Write-Host "  current: $currentVer, latest: $latestTag"
+
+            if ($latestTag -eq $currentVer) {
+              Write-Host "  $appName is up to date."
+              return
+            }
+
+            # Build download URL from autoupdate template
+            $urlTemplate = $manifest.autoupdate.architecture.'64bit'.url
+            $newUrl = $urlTemplate -replace '\$version', $latestTag
+            $fileName = Split-Path $newUrl -Leaf
+
+            Write-Host "  Downloading $fileName ..."
+            $tempFile = Join-Path $env:TEMP $fileName
+            try {
+              curl -sL -o $tempFile $newUrl
+              if (-not (Test-Path $tempFile) -or (Get-Item $tempFile).Length -eq 0) {
+                Write-Host "  Download failed, skipping"
+                return
+              }
+              $hash = (Get-FileHash $tempFile -Algorithm SHA256).Hash.ToLower()
+              Write-Host "  SHA256: $hash"
+            } catch {
+              Write-Host "  Error: $_"
+              return
+            } finally {
+              if (Test-Path $tempFile) { Remove-Item $tempFile }
+            }
+
+            # Update manifest
+            $manifest.version = $latestTag
+            $manifest.architecture.'64bit'.url = $newUrl
+            $manifest.architecture.'64bit'.hash = $hash
+
+            # Update pre_install if it references the old version
+            if ($manifest.pre_install) {
+              for ($i = 0; $i -lt $manifest.pre_install.Count; $i++) {
+                $manifest.pre_install[$i] = $manifest.pre_install[$i] -replace $currentVer, $latestTag
+              }
+            }
+
+            $manifest | ConvertTo-Json -Depth 10 | Set-Content $manifestPath -Encoding UTF8
+            Write-Host "  $appName updated to $latestTag !"
+            $updated = $true
           }
-          # Copy updated manifests back to workspace
-          Copy-Item -Path "$bucketDir\bucket\*.json" -Destination "${{ github.workspace }}\bucket\" -Force
+
+          if (-not $updated) {
+            Write-Host "All manifests are up to date."
+          }
 
       - name: Sync README app table with manifests
         uses: actions/github-script@v7
@@ -50,40 +96,21 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-
             const bucketDir = process.env.GITHUB_WORKSPACE + '/bucket';
             const files = fs.readdirSync(bucketDir).filter(f => f.endsWith('.json')).sort();
-
             const rows = [];
             for (const file of files) {
-              const manifest = JSON.parse(fs.readFileSync(path.join(bucketDir, file), 'utf8'));
-              const name = path.basename(file, '.json');
-              const ver = manifest.version || '';
-              const desc = manifest.description || '';
-              const homepage = manifest.homepage || '';
-              rows.push(`| [${name}](${homepage}) | ${desc} | ${ver} |`);
+              const m = JSON.parse(fs.readFileSync(path.join(bucketDir, file), 'utf8'));
+              rows.push(`| [${path.basename(file, '.json')}](${m.homepage || ''}) | ${m.description || ''} | ${m.version || ''} |`);
             }
-            const table =
-              '| 应用 | 描述 | 版本 |\n' +
-              '|------|------|------|\n' +
-              rows.join('\n');
-
+            const table = '| 应用 | 描述 | 版本 |\n|------|------|------|\n' + rows.join('\n');
             const readmePath = process.env.GITHUB_WORKSPACE + '/README.md';
-            const readme = fs.readFileSync(readmePath, 'utf8');
-            const startMarker = '<!-- APPS_TABLE_BEGIN -->';
-            const endMarker = '<!-- APPS_TABLE_END -->';
-
-            const newSection = startMarker + '\n' + table + '\n' + endMarker;
-            const updated = readme.replace(
-              /<!-- APPS_TABLE_BEGIN -->[\s\S]*?<!-- APPS_TABLE_END -->/,
-              newSection
-            );
-
+            let readme = fs.readFileSync(readmePath, 'utf8');
+            const re = /<!-- APPS_TABLE_BEGIN -->[\s\S]*?<!-- APPS_TABLE_END -->/;
+            const updated = readme.replace(re, '<!-- APPS_TABLE_BEGIN -->\n' + table + '\n<!-- APPS_TABLE_END -->');
             if (updated !== readme) {
               fs.writeFileSync(readmePath, updated);
-              console.log('README app table synced.');
-            } else {
-              console.log('README app table unchanged.');
+              console.log('README synced.');
             }
 
       - name: Commit and push if changed
