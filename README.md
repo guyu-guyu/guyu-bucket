@@ -24,7 +24,7 @@ README.md     # 本文件
 | 应用 | 描述 | 版本 |
 |------|------|------|
 | schedulecenter | Windows 定时任务管理中心 — WPF GUI + CLI 双模式 | 0.1.0 |
-| autocompress | 视频素材定时压缩工具（Tauri 重构版），自动扫描+ffmpeg 压缩+cron调度 | 0.1.0 |
+| autocompress | 视频素材定时压缩工具，自动扫描+ffmpeg 压缩+cron调度 | 0.2.0 |
 
 ## 许可证
 
