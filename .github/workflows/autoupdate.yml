@@ -17,19 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup Scoop
+      - name: Setup Scoop and check for updates
         shell: pwsh
+        continue-on-error: true
         run: |
           Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
           Invoke-RestMethod get.scoop.sh | Invoke-Expression
+
           $ws = '${{ github.workspace }}'
           $url = "file:///$($ws.Replace('\','/'))"
           scoop bucket add guyu-bucket $url
 
-      - name: Check and update manifests
-        shell: pwsh
-        continue-on-error: true
-        run: |
           $bucketDir = "$env:USERPROFILE\scoop\buckets\guyu-bucket"
           Get-ChildItem "$bucketDir\bucket\*.json" | ForEach-Object {
             $appName = $_.BaseName
