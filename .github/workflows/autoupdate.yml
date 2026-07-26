@@ -23,7 +23,6 @@ jobs:
         shell: pwsh
         continue-on-error: true
         run: |
-          $hasUpdates = $false
           Get-ChildItem "${{ github.workspace }}\bucket\*.json" | ForEach-Object {
             $appName = $_.BaseName
             Write-Host "Checking $appName ..."
@@ -32,24 +31,59 @@ jobs:
               Write-Host "  $appName is up to date."
             } elseif ($result -match "New version") {
               Write-Host "  $appName has been updated!"
-              $hasUpdates = $true
             } else {
-              Write-Host "  $appName check skipped or failed (non-fatal)."
+              Write-Host "  $appName check skipped (non-fatal)."
             }
           }
-          echo "hasUpdates=$hasUpdates" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
-      - name: Commit changes
-        shell: pwsh
-        if: env.hasUpdates == 'True'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet || git commit -m "chore: auto-update manifests"
-          git push
+      - name: Sync README app table with manifests
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
 
-      - name: No updates
-        shell: pwsh
-        if: env.hasUpdates != 'True'
-        run: Write-Host "All manifests are up to date. Nothing to commit."
+            // Read all manifests from bucket/
+            const bucketDir = process.env.GITHUB_WORKSPACE + '/bucket';
+            const files = fs.readdirSync(bucketDir).filter(f => f.endsWith('.json'));
+
+            const rows = [];
+            for (const file of files) {
+              const manifest = JSON.parse(fs.readFileSync(path.join(bucketDir, file), 'utf8'));
+              const name = path.basename(file, '.json');
+              const ver = manifest.version || '';
+              const desc = manifest.description || '';
+              const homepage = manifest.homepage || '';
+              rows.push(`| [${name}](${homepage}) | ${desc} | ${ver} |`);
+            }
+            const table =
+              '| 应用 | 描述 | 版本 |\n' +
+              '|------|------|------|\n' +
+              rows.join('\n');
+
+            // Replace content between markers in README
+            const readmePath = process.env.GITHUB_WORKSPACE + '/README.md';
+            const readme = fs.readFileSync(readmePath, 'utf8');
+            const startMarker = '<!-- APPS_TABLE_BEGIN -->';
+            const endMarker = '<!-- APPS_TABLE_END -->';
+
+            const newSection = startMarker + '\n' + table + '\n' + endMarker;
+            const updated = readme.replace(
+              /<!-- APPS_TABLE_BEGIN -->[\s\S]*?<!-- APPS_TABLE_END -->/,
+              newSection
+            );
+
+            if (updated !== readme) {
+              fs.writeFileSync(readmePath, updated);
+              console.log('README app table synced.');
+            } else {
+              console.log('README app table unchanged.');
+            }
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update manifests"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          branch: ${{ github.head_ref }}
