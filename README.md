@@ -28,7 +28,7 @@ README.md     # 本文件
 | [elyterminal](https://github.com/ELY-Open-Source/ELYTerminal) | 跨平台终端 — 基于 GPUI 和 Ely 组件，左侧会话、中间终端、右侧 Git 或文件 | 0.2.4 |
 | [msime](https://msime.app) | 水杉输入法 Windows 版 — TSF 输入法核心、服务、GUI 与设置页（内测） | 0.13.2 |
 | [schedulecenter](https://github.com/guyu-guyu/scheduleCenter) | Windows 定时任务管理中心 — WPF GUI + CLI 双模式，管理 Windows 任务计划程序 | 0.1.1 |
-| [solidcraft](https://solidcraft.io) | 开源参数化 3D CAD 应用 — 纯 Rust 编写，草图与约束、参数化特征时间轴、装配与钣金，含桌面端、浏览器端和无头 CLI/MCP 服务器 | 0.30.1 |
+| [solidcraft](https://solidcraft.io) | 开源参数化 3D CAD 应用 — 纯 Rust 编写，草图与约束、参数化特征时间轴、装配与钣金，含桌面端、浏览器端和无头 CLI/MCP 服务器 | 0.40.1 |
 <!-- APPS_TABLE_END -->
 
 ## 许可证
