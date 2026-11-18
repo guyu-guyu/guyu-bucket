@@ -29,10 +29,6 @@
         [
             "solidcraft-cli.exe",
             "solidcraft-cli"
-        ],
-        [
-            "solvecraft-cli.exe",
-            "solvecraft-cli"
         ]
     ],
     "shortcuts": [
