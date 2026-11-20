@@ -1,0 +1,21 @@
+README.md
+  s_b34b2b31021f3c::t_a2a9a93accc08b 28
+bucket/basalt.json
+  s_b34b2b31021f3c::t_fa7dc8d541bc72 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "abd15d22c1b53320616fdcccc6e66c55c6d26c61",
+  "prompts": {},
+  "sessions": {
+    "s_b34b2b31021f3c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a7b796d4-13ba-42d9-a7ef-33d89219495f",
+        "model": "auto-smart"
+      },
+      "human_author": "leijieliu <leijieliu@tencent.com>"
+    }
+  }
+}
