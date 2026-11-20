@@ -1,0 +1,21 @@
+bucket/emeraldian.json
+  s_b34b2b31021f3c::t_650689de882171 1-29
+README.md
+  s_b34b2b31021f3c::t_b6b1df8a35b557 31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c2023e765724424c1ea4d59d77c42c6f0ad8f679",
+  "prompts": {},
+  "sessions": {
+    "s_b34b2b31021f3c": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a7b796d4-13ba-42d9-a7ef-33d89219495f",
+        "model": "auto-smart"
+      },
+      "human_author": "leijieliu <leijieliu@tencent.com>"
+    }
+  }
+}
