@@ -13,6 +13,7 @@
             "hash": "a654fed47977afad710324abbae01af935c577ed742ccebe83886a49d12f1cb2"
         }
     },
+    "pre_install": "Move-Item \"$dir\\arke-$version*.exe\" \"$dir\\arke.exe\" -Force",
     "bin": "arke.exe",
     "shortcuts": [
         [
@@ -32,5 +33,6 @@
                 "url": "https://github.com/Koimsurai/Arke/releases/download/v$version/arke-$version-arm64.exe"
             }
         }
-    }
+    },
+    "post_uninstall": "Remove-Item \"$dir\\arke.exe\" -Force -ErrorAction SilentlyContinue"
 }
