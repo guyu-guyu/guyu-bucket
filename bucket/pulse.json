@@ -10,6 +10,14 @@
         }
     },
     "installer": {
+        "script": [
+            "$shell = New-Object -ComObject WScript.Shell",
+            "$shortcut = $shell.CreateShortcut((Join-Path $dir 'Pulse.lnk'))",
+            "$shortcut.TargetPath = Join-Path $dir 'pulse.exe'",
+            "$shortcut.WorkingDirectory = $dir",
+            "$shortcut.IconLocation = Join-Path $dir 'pulse.exe'",
+            "$shortcut.Save()"
+        ],
         "args": [
             "/VERYSILENT",
             "/SUPPRESSMSGBOXES",
@@ -31,7 +39,7 @@
     "bin": "pulse.exe",
     "shortcuts": [
         [
-            "pulse.exe",
+            "Pulse.lnk",
             "Pulse"
         ]
     ],
