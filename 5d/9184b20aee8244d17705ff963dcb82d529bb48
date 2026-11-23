@@ -1,0 +1,21 @@
+bucket/pulse.json
+  s_9c7181946f6258::t_ead900059da8cd 1-48
+README.md
+  s_9c7181946f6258::t_46819f978c44e4 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5d9184b20aee8244d17705ff963dcb82d529bb48",
+  "prompts": {},
+  "sessions": {
+    "s_9c7181946f6258": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a5454fee-015a-43a3-982b-7941b61f14a5",
+        "model": "auto-smart"
+      },
+      "human_author": "leijieliu <leijieliu@tencent.com>"
+    }
+  }
+}
