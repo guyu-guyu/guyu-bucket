@@ -1,0 +1,50 @@
+{
+    "version": "0.121.0",
+    "description": "Epic Games 官方游戏启动器（v2 预览版）— 购买、下载和启动 Epic 游戏与虚幻引擎资源",
+    "homepage": "https://store.epicgames.com/download",
+    "license": "Freeware",
+    "notes": [
+        "按用户安装到 %LOCALAPPDATA%\\Epic Games\\Launcher，位于 Scoop 目录之外，启动器会自行更新",
+        "scoop update 会重新安装最新版本；卸载时默认保留已下载的游戏、引擎与 Fab 内容",
+        "v2 启动器基于 Tauri 重写，目前仍处于预览阶段"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://content-download-egs.distro.on.epicgames.com/Builds/EGLv2/0.121.0%2Bg81137b1/Windows/EpicGamesLauncherSetup.exe?launcherfilename=EpicGamesLauncherSetup.exe#/setup.exe",
+            "hash": "13f75263d0e1452ab6472aea9f92b9deb478a519265a0b3ef77af2c3db68d5ca"
+        }
+    },
+    "installer": {
+        "file": "setup.exe",
+        "args": [
+            "--silent",
+            "--skip-autolaunch"
+        ],
+        "keep": true
+    },
+    "uninstaller": {
+        "file": "setup.exe",
+        "args": [
+            "--silent",
+            "--uninstall"
+        ]
+    },
+    "checkver": {
+        "script": [
+            "$r = [Net.HttpWebRequest]::Create('https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherSetup-x86_64.exe')",
+            "$r.Method = 'HEAD'",
+            "$r.AllowAutoRedirect = $false",
+            "$resp = $r.GetResponse()",
+            "$resp.Headers['Location']",
+            "$resp.Close()"
+        ],
+        "regex": "EGLv2/(?<version>[\\d.]+)%2B(?<commit>[0-9a-z]+)/"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://content-download-egs.distro.on.epicgames.com/Builds/EGLv2/$version%2B$matchCommit/Windows/EpicGamesLauncherSetup.exe?launcherfilename=EpicGamesLauncherSetup.exe#/setup.exe"
+            }
+        }
+    }
+}
