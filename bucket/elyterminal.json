@@ -1,5 +1,5 @@
 {
-    "version": "0.2.6",
+    "version": "0.2.7",
     "description": "跨平台终端 — 基于 GPUI 和 Ely 组件，左侧会话、中间终端、右侧 Git 或文件",
     "homepage": "https://github.com/ELY-Open-Source/ELYTerminal",
     "license": "MIT",
@@ -11,12 +11,12 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/ELY-Open-Source/ELYTerminal/releases/download/v0.2.6/ELYTerminal-0.2.6-windows-x86_64.zip",
-            "hash": "64f928020e42104f99d58a732b83311a038583296766ab1038eb81f01fed2ae4"
+            "url": "https://github.com/ELY-Open-Source/ELYTerminal/releases/download/v0.2.7/ELYTerminal-0.2.7-windows-x86_64.zip",
+            "hash": "ced1e24ba40de84676a2d93ba0baf2d85b7aa65489d51bac4f559d7b26cef2ad"
         },
         "arm64": {
-            "url": "https://github.com/ELY-Open-Source/ELYTerminal/releases/download/v0.2.6/ELYTerminal-0.2.6-windows-aarch64.zip",
-            "hash": "58a5cb331718f11a2b07f48f9041adfa5ecdc63de60f404e8011ac89b1ce94e1"
+            "url": "https://github.com/ELY-Open-Source/ELYTerminal/releases/download/v0.2.7/ELYTerminal-0.2.7-windows-aarch64.zip",
+            "hash": "1cf5cb35cb5c4be642622ba9f9ef626939e19229a1253122ef0db5dd98a723a4"
         }
     },
     "bin": "elyterminal.exe",

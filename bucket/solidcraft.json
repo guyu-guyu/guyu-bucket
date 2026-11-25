@@ -1,5 +1,5 @@
 {
-    "version": "0.48.1",
+    "version": "0.49.0",
     "description": "开源参数化 3D CAD 应用 — 纯 Rust 编写，草图与约束、参数化特征时间轴、装配与钣金，含桌面端、浏览器端和无头 CLI/MCP 服务器",
     "homepage": "https://solidcraft.io",
     "license": "MIT,Apache-2.0",
@@ -10,19 +10,19 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/tangency-labs/solidcraft/releases/download/v0.48.1/solidcraft-0.48.1-windows-x64-portable.zip",
-            "hash": "c61f78f1c9f0e1404323a076e3f1a926c55d060f5e33d5c6f71063028543bcd4",
-            "extract_dir": "solidcraft-0.48.1-windows-x64-portable"
+            "url": "https://github.com/tangency-labs/solidcraft/releases/download/v0.49.0/solidcraft-0.49.0-windows-x64-portable.zip",
+            "hash": "e059c82c9d365c58af460f3ff7e5521ca068aeb5099f06858d481fa01d4873af",
+            "extract_dir": "solidcraft-0.49.0-windows-x64-portable"
         },
         "arm64": {
-            "url": "https://github.com/tangency-labs/solidcraft/releases/download/v0.48.1/solidcraft-0.48.1-windows-arm64-portable.zip",
-            "hash": "a6c372f3f454c1aa2c98ffa99b49f67330821f51397462061840e599d869e8b5",
-            "extract_dir": "solidcraft-0.48.1-windows-arm64-portable"
+            "url": "https://github.com/tangency-labs/solidcraft/releases/download/v0.49.0/solidcraft-0.49.0-windows-arm64-portable.zip",
+            "hash": "679e768de95445c55ff79e8079c86f08e2e08be049b1b55f2081c9f0dd1a0d8b",
+            "extract_dir": "solidcraft-0.49.0-windows-arm64-portable"
         },
         "32bit": {
-            "url": "https://github.com/tangency-labs/solidcraft/releases/download/v0.48.1/solidcraft-0.48.1-windows-x86-portable.zip",
-            "hash": "997d6ec17ac23924080d3eb89db0c172a8fc43c555599c4b984cabb9a6723bec",
-            "extract_dir": "solidcraft-0.48.1-windows-x86-portable"
+            "url": "https://github.com/tangency-labs/solidcraft/releases/download/v0.49.0/solidcraft-0.49.0-windows-x86-portable.zip",
+            "hash": "81527146a08368ccc21e44990c192a25742f3c489c24ae3cdbe46d4f06663104",
+            "extract_dir": "solidcraft-0.49.0-windows-x86-portable"
         }
     },
     "bin": [
