@@ -24,6 +24,7 @@ README.md     # 本文件
 <!-- APPS_TABLE_BEGIN -->
 | 应用 | 描述 | 版本 |
 |------|------|------|
+| [activitywatch-plus](https://github.com/guyu-guyu/activitywatch-plus) | ActivityWatch 个人增强版 — 自动时间追踪，在官方桌面版基础上为 aw-qt 增加 WebDAV 自动备份 | 0.14.4b1-plus.2 |
 | [arke](https://github.com/Koimsurai/Arke) | A fast, beautiful file explorer for Windows that never makes you wait. Built with Rust and GPUI. | 0.9.1 |
 | [autovideocompressor](https://github.com/guyu-guyu/AutoVideoCompressor) | 视频素材定时压缩工具 — 自动扫描目录、调用 ffmpeg 压缩、支持 Per-directory 配置和 cron 调度 | 0.3.4 |
 | [basalt](https://github.com/erikjuhani/basalt) | 在终端里管理 Obsidian vault 和笔记的 TUI | 0.14.0 |
