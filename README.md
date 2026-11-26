@@ -32,6 +32,7 @@ README.md     # 本文件
 | [elyterminal](https://github.com/ELY-Open-Source/ELYTerminal) | 跨平台终端 — 基于 GPUI 和 Ely 组件，左侧会话、中间终端、右侧 Git 或文件 | 0.2.7 |
 | [emeraldian](https://github.com/iamrohithrnair/emeraldian) | 在终端里浏览和编辑 Obsidian vault 的 TUI — 三栏布局、实时预览、反向链接和图谱 | 0.10.2 |
 | [epicgameslauncher](https://store.epicgames.com/download) | Epic Games 官方游戏启动器（v2 预览版）— 购买、下载和启动 Epic 游戏与虚幻引擎资源 | 0.123.0 |
+| [materializr](https://materializr.com) | 开源参数化 3D CAD — 约束草图、实体建模、螺纹、SVG 与文字雕刻，导出 STL/STEP 等格式，含桌面端与移动端 | 1.8.0 |
 | [msime](https://msime.app) | 水杉输入法 Windows 版 — TSF 输入法核心、服务、GUI 与设置页（内测） | 0.14.1 |
 | [pulse](https://github.com/jimmgreen/pulse) | 现代 Windows 文件管理器 — 多窗格工作区、索引与拼音搜索、丰富预览、标签和批量重命名 | 1.0.60 |
 | [schedulecenter](https://github.com/guyu-guyu/scheduleCenter) | Windows 定时任务管理中心 — WPF GUI + CLI 双模式，管理 Windows 任务计划程序 | 0.1.1 |
