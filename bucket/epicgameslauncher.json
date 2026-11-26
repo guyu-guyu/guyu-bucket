@@ -1,5 +1,5 @@
 {
-    "version": "0.122.0",
+    "version": "0.123.0",
     "description": "Epic Games 官方游戏启动器（v2 预览版）— 购买、下载和启动 Epic 游戏与虚幻引擎资源",
     "homepage": "https://store.epicgames.com/download",
     "license": "Freeware",
@@ -10,8 +10,8 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://content-download-egs.distro.on.epicgames.com/Builds/EGLv2/0.122.0%2Bg2109121/Windows/EpicGamesLauncherSetup.exe?launcherfilename=EpicGamesLauncherSetup.exe#/setup.exe",
-            "hash": "bc200458a4633b25c42731e55b56bf62fc87906b7eb3b0af32e4e830bed5a926"
+            "url": "https://content-download-egs.distro.on.epicgames.com/Builds/EGLv2/0.123.0%2Bgee1223b/Windows/EpicGamesLauncherSetup.exe?launcherfilename=EpicGamesLauncherSetup.exe#/setup.exe",
+            "hash": "ae235a0f735c8c3c02a71e6bf23163c4381d5dbff69d64f383ddeceb9d2314ab"
         }
     },
     "installer": {
