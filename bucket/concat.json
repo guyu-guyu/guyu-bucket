@@ -1,5 +1,5 @@
 {
-    "version": "0.2.12",
+    "version": "0.2.13",
     "description": "免费开源跨平台视频编辑器 — 自动字幕、语音合成、背景移除、关键帧动画、多轨剪辑与 4K 导出，全部本地运行，另含 MCP 服务器与 JSON-RPC API",
     "homepage": "https://github.com/jub0t/Concat",
     "license": "AGPL-3.0-or-later",
@@ -11,8 +11,8 @@
     "innosetup": true,
     "architecture": {
         "64bit": {
-            "url": "https://github.com/jub0t/Concat/releases/download/v0.2.12/Concat-0.2.12-windows-x86_64-setup.exe",
-            "hash": "02d15bed7961d6174d8c2c58b9748187051c332dbc749b8faee1ef39e8f9ad06"
+            "url": "https://github.com/jub0t/Concat/releases/download/v0.2.13/Concat-0.2.13-windows-x86_64-setup.exe",
+            "hash": "36883d98cb0f96ccf188c92a1a08a23fc583c971a207567c07ae4c91f29349b0"
         }
     },
     "bin": [
