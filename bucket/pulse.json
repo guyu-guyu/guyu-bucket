@@ -1,12 +1,12 @@
 {
-    "version": "1.0.60",
+    "version": "1.0.62",
     "description": "现代 Windows 文件管理器 — 多窗格工作区、索引与拼音搜索、丰富预览、标签和批量重命名",
     "homepage": "https://github.com/jimmgreen/pulse",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/jimmgreen/pulse/releases/download/v1.0.60/PulseSetup-1.0.60.exe",
-            "hash": "827aebcb14a9e4f4ec8281cf89e339cc887ec6f541ff6e80518ac463732c5234"
+            "url": "https://github.com/jimmgreen/pulse/releases/download/v1.0.62/PulseSetup-1.0.62.exe",
+            "hash": "951b5d2a88418965638189da08a2d8fb17e53fc5a5298f4be8e5e49ed1a9e117"
         }
     },
     "installer": {
